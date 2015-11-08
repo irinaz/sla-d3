@@ -24,8 +24,9 @@ d3.json("data/filing-per-year.json", function(data) {
             ],
             'filings-per-year',
             {
-                w: 200,
-                h: 100,
+                width: 200,
+                height: 100,
+				margin: {top: 0, right: 20, bottom: 50, left: 100},
                 format: 'd'
 
             }
@@ -191,6 +192,45 @@ d3.json("data/filing-per-year.json", function(data) {
 
             }
         );
+		
+		
+		
+
+    }
+);
+
+/*
+Industries
+ */
+
+d3.json("data/suites-by-industry.json", function(data) {
+
+
+        //Industries (filings number per year)
+        drawVBar(
+            [
+                {
+                    key: "Suites Filed by Industry per Year",
+                    //color: "#d67777",
+                    values: data.items.map(function (datum) {
+                        return {x: datum.label, y: datum.count};
+                    })
+                }
+            ],
+            'suites-by-industry',
+            {
+                 xformat: false,
+                margin:  {top: 200, right: 20, bottom: 550, left: 50},
+                chart:  nv.models.multiBarChart()
+                    //     .transitionDuration(350)
+                    .reduceXTicks(false)   //If 'false', every single x-axis tick label will be rendered.
+                    .rotateLabels(270)      //Angle to rotate x-axis labels.
+                    .showControls(false)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+                    .groupSpacing(0.1)  //Distance between each group of bars.
+
+            }
+        );
+
 
     }
 );
