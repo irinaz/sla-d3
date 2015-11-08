@@ -1,0 +1,6 @@
+name = NVD3
+description = Reusable d3 charts http://nvd3.org
+files[js][] = nv.d3.min.js
+
+version = 0.1
+dependencies[] = d3

@@ -4,14 +4,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Untitled Document</title>
 
-<script type="text/javascript" src="nv.d3.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
+<script type="text/javascript" src="nvd3/nv.d3.js"></script>
 <!--<script type="text/javascript" src="search-cases-d3.js"></script>
---><script type="text/javascript" src="search-cases-d3-test.js"></script>
-<script type="text/javascript" src="d3.min.js"></script>
+-->
+<!--<script type="text/javascript" src="d3.min.js"></script>
+-->
+
+<script type="text/javascript" src="sla.d3.js"></script>
+<script type="text/javascript" src="search-cases-d3-test.js"></script>
+ <link rel="stylesheet" type="text/css" href="nvd3/nv.d3.css">
+
+ 
 
 </head>
 
 <body>
+		drupal_add_js(libraries_get_path( 'd3') .'/d3.min.js');
+ 		drupal_add_js(libraries_get_path( 'nvd3') .'/nv.d3.js');
+ 		drupal_add_css(libraries_get_path( 'nvd3') .'/nv.d3.css');
+ 		drupal_add_js(libraries_get_path( 'd3.sla') .'/sla.d3.js');
+ 		drupal_add_css(libraries_get_path( 'd3.sla') .'/sla.d3.css');
+
+
 
 <style>
 .views-exposed-form .views-exposed-widget {
@@ -285,6 +300,6 @@
   </div>
   <!-- // end clear six--> 
  
-  <script type="text/javascript" src="search-cases-d3.js"></script>
+  <script type="text/javascript" src="search-cases-d3-test.js"></script>
 </body>
 </html>
