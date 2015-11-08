@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+
+<script type="text/javascript" src="nv.d3.js"></script>
+<script type="text/javascript" src="search-cases-d3.js"></script>
+</head>
+
+<body>
+
+<style>
+.views-exposed-form .views-exposed-widget {
+    float: none;
+ }
+.views-exposed-form .form-type-bef-checkbox label {
+    width: auto;
+    font-weight: normal;
+	margin-left: 1.5em;
+}
+
+.views-exposed-form  .buttons  .views-exposed-widget {
+    float: left;
+ }
+.views-exposed-form  .buttons  .views-exposed-widget .form-submit {
+    margin-top: 6px;
+	margin-bottom: 12px;
+}
+.fieldset-wrapper {
+    margin-left: 0;
+    border: 1px solid #eee;
+    background: #F5F5F5;
+    padding: .8em;
+}
+
+.description { display:none;}
+
+.chart { height:400px; width:100%;  border:1px solid #ddd; padding: 1em;}
+/* .case-section.odd { border-bottom: 3px double #333; margin-bottom: 1em; padding: 1em;  }
+*/ </style>
+  
+  <div id="filing-info" class="span12 clear-row  one case-section">
+    <h2> Case Filing Information </h2>
+     
+      <div id="filings-per-year" class="chart column span12" >
+        <h3>Number of Filings per Year </h3>
+      </div>
+      
+<!--      <div id="filings-per-year-map" class="chart map span12" >
+        <h3> Heat Map </h3>
+      </div>-->
+      
+      <div id="class-period-length" class="chart horizontal span12" >
+        <h3>Mean / Median Class (Period) Length - Days </h3>
+    </div>
+        
+      <div id="class-period-length-month" class="chart horizontal span12" >
+        <h3>Mean / Median Class (Period) Length - Months </h3>
+      </div>
+      
+</div> <!-- // end clear one-->
+   
+  <div class="tabs">
+        <ul class="nav nav-tabs" id="case-submenu" >
+          <li><a href="#filing-info"  > Filing Information</a></li>
+          <li  class="active"><a  href="#market-data"> Issuer & Market <br  />
+            Information</a></li>
+          <li><a  href="#factors"> Substantive Factors</a></li>
+          <li><a  href="#parties"> Parties</a></li>
+          <li><a  href="#litigation-proceedings"> Litigation Proceedings</a></li>
+          <li><a  href="#settlements"> Settlements</a></li>
+        </ul>
+</div> 
+  
+  <div id="market-data" class="span12 clear-row odd two well case-section" >
+    <h2> Market Data </h2>
+    <div class="span12 clear-row ">
+     
+      <div id="suites-by-industry" class="chart donut span12" >
+        <h3> Suites Filed by Industry </h3>
+        same data, two chartst donut and column 
+     </div>
+      
+      <div id="issuer-market-cap-mean" class="chart column span12" >
+        <h3> Mean Issuer Market Cap </h3>
+      </div>
+
+      <div id="issuer-market-cap-median" class="chart column span12" >
+        <h3> Median Issuer Market Cap</h3>
+      </div>
+         
+      <div id="issuer-market-cap-by-year" class="chart column span12" >
+        <h3> Mean and Median Issuer Market Cap By Filing Year </h3>
+      </div>
+      
+      
+      <div id="filings-by-market-cap-range" class="chart column span12" >
+        <h3> Filings by Market Cap Range </h3>         
+      </div>
+ 
+<!--      <div id="cases-against-domestic-foreign" class="chart column span12" >
+        <h3> Cases Against Domestic and Foreign Issuers </h3>
+      </div>-->
+ 
+      <div id="shareholder-losses-mean-median" class="chart column span12" >
+        <h3>Mean and Median Shareholder Losses </h3>
+      </div>
+      
+      
+      <div id="shareholder-losses-by-year" class="chart column  span12" >
+        <h3> Shareholder Losses by Year </h3>
+      </div>
+    </div>
+    <!-- // end row--> 
+  </div>
+  <!-- // end clear two-->
+  
+  <div class="tabs">
+        <ul class="nav nav-tabs" id="case-submenu" >
+          <li><a href="#filing-info"  > Filing Information</a></li>
+          <li><a  href="#market-data"> Issuer & Market <br  />
+            Information</a></li>
+          <li  class="active"><a  href="#factors"> Substantive Factors</a></li>
+          <li><a  href="#parties"> Parties</a></li>
+          <li><a  href="#litigation-proceedings"> Litigation Proceedings</a></li>
+          <li><a  href="#settlements"> Settlements</a></li>
+        </ul>
+</div>
+  
+  <div id="factors" class="span12 clear-row even three case-section" >
+    <h2> Substantive Factors </h2>
+    <div class="span12 clear-row ">
+     
+      <div id="nature-of-misstatement" class="chart donut span12" >
+        <h3> Nature of Misstatement </h3>
+      </div>
+      
+      
+      <div id="restatements" class="chart donut span12" >
+        <h3> Restatements in Financial Cases </h3>
+      </div>
+       
+      <div id="alleged-section-violations" class="chart donut span12" >
+        <h3>Alleged Section Violations - two versions of charts </h3>
+      </div>
+       
+      <div id="sec" class="chart donut span12" >
+        <h3>  Parallel SEC Enforcements </h3>
+      </div>
+ 
+      <div id="context-of-misstatement" class="chart column span12" >
+        <h3>  Context of Misstatement  </h3>
+      </div>
+
+      <div id="alleged-intent" class="chart column span12" >
+        <h3>   Alleged Elements of Intent </h3>
+      </div>
+
+      
+    </div>
+    <!-- // end row--> 
+  </div>
+  
+  <!-- // end clear three-->
+  
+  <div class="tabs">
+        <ul class="nav nav-tabs" id="case-submenu" >
+          <li><a href="#filing-info"  > Filing Information</a></li>
+          <li><a  href="#market-data"> Issuer & Market <br  />
+            Information</a></li>
+          <li><a  href="#factors"> Substantive Factors</a></li>
+          <li  class="active"><a  href="#parties"> Parties</a></li>
+          <li><a  href="#litigation-proceedings"> Litigation Proceedings</a></li>
+          <li><a  href="#settlements"> Settlements</a></li>
+        </ul>
+</div>
+  
+  <div id="parties" class="span12 clear-row odd four well case-section" >
+    <h2>Parties </h2>
+    <div class="span12 clear-row ">
+    
+      <div id="institutional-plaintiffs" class="chart column span12" >
+        <h3> Institutional Plaintiffs </h3>
+      </div>
+
+      <div id="director-officer-positions-named" class="chart column span12" >
+        <h3>Director & Officer Positions Named </h3>
+      </div>
+
+      <div id="auditors-named" class="chart donut span12" >
+        <h3>Auditors Named in Financial Misstatement Cases </h3>
+      </div>
+       
+      <div id="underwriters-defendants" class="chart donut span12" >
+        <h3>Underwriters Defendants in Public Offering Cases </h3>
+      </div>
+    </div>
+    <!-- // end row--> 
+  </div>
+  <!-- // end clear four-->
+  <div class="tabs">
+        <ul class="nav nav-tabs" id="case-submenu" >
+          <li><a href="#filing-info"  > Filing Information</a></li>
+          <li><a  href="#market-data"> Issuer & Market <br  />
+            Information</a></li>
+          <li><a  href="#factors"> Substantive Factors</a></li>
+          <li><a  href="#parties"> Parties</a></li>
+          <li  class="active" ><a  href="#litigation-proceedings"> Litigation Proceedings</a></li>
+          <li><a  href="#settlements"> Settlements</a></li>
+        </ul>
+</div>
+  
+  <div id="litigation-proceedings" class="span12 clear-row event five case-section"  >
+    <h2> Litigation Proceedings </h2>
+    <div class="span12 clear-row ">
+    
+      <div id="case-status" class="chart donut span12" >
+        <h3>Case Status </h3>
+      </div>
+    
+      <div id="settlement-timing" class="chart donut span12" >
+        <h3>Settlement Timing</h3>
+      </div>
+      
+      <div id="case-duration-until-filing-settlement" class="chart horizontal span12" >
+        <h3>Case Duration Until Filing of Stipulation of Settlement (Note: for settled cases)  </h3>
+      </div>
+    
+      <div id="case-duration-until-filing-settlement-mean" class="chart horizontal span12" >
+        <h3> Mean and Median - Case Duration Until Filing of Stipulation of Settlement (Note: for settled cases)  </h3>
+      </div>
+    
+      <div id="length-of-discovery" class="chart horizontal span12" >
+        <h3>Length of Discovery (In settled cases) </h3>
+      </div>
+    
+      <div id="length-of-discovery-mean" class="chart horizontal span12" >
+        <h3> Length of Discovery Mean/Median (In settled cases) </h3>
+      </div>
+   
+    </div>
+    <!-- // end row--> 
+  </div>
+  <!-- // end clear five-->
+  <div class="tabs">
+        <ul class="nav nav-tabs" id="case-submenu" >
+          <li><a href="#filing-info"  > Filing Information</a></li>
+          <li><a  href="#market-data"> Issuer & Market <br  />
+            Information</a></li>
+          <li><a  href="#factors"> Substantive Factors</a></li>
+          <li><a  href="#parties"> Parties</a></li>
+          <li><a  href="#litigation-proceedings"> Litigation Proceedings</a></li>
+          <li  class="active"><a  href="#settlements"> Settlements</a></li>
+        </ul>
+      </div>
+  
+  <div id="settlements" class="span12 clear-row six odd well case-section"  >
+    <h2> Settlements </h2>
+    <div class="span12 clear-row ">
+     
+      <div id="distribution-settlement-size" class="chart column span12" >
+        <h3>Distribution of Settlement Sizes</h3>
+      </div>
+      
+      <div id="distribution-settlement-size-buckets" class="chart donut span12" >
+        <h3>Distribution of Settlements by Sizes (bucket) </h3>
+      </div>
+       
+      <div id="settlement-size-by-timing-mean" class="chart column span12" >
+        <h3>Mean and Median Settlement Size</h3>
+    </div>
+    <!-- // end row-->
+    
+    <div class="span12 clear-row ">
+      <div id="settlement-size-by-timing" class="chart column span12" >
+        <h3>Settlement Size by Timing (Early/Late pleading)</h3>
+      </div>
+        
+    </div>
+    <!-- // end row--> 
+  </div>
+  <!-- // end clear six--> 
+ 
+  <script type="text/javascript" src="<?php print drupal_get_path('theme', 'sla');?>/js/search-cases-d3.js"></script>
+</body>
+</html>
