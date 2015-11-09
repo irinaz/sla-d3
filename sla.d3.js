@@ -1,6 +1,9 @@
 
 function setSLAChart(id, settings) {
-    console.log ("creating svg element "+id);
+    if (id === 'filings-per-year' ) {
+        console.log ("creating svg element "+id +"settings: ");
+        console.dir(settings);
+    }
 
     var w = 600;
     var h = 300;
@@ -16,7 +19,9 @@ function setSLAChart(id, settings) {
 
 
 function drawHBar(data, id, settings) {
-    console.log(data);
+
+    var colors = settings.colors || d3.scale.category20().range();
+
     nv.addGraph(function() {
 
         var svg = setSLAChart(id, {w: settings.w, h: settings.h});
@@ -30,7 +35,9 @@ function drawHBar(data, id, settings) {
                 .showValues(true)           //Show bar value next to each bar.
                 .tooltips(true)             //Show tooltips on hover.
 //          .transitionDuration(350)
-                .showControls(typeof settings.showControls != 'undefined' ? settings.showControls : true);        //Allow user to switch between "Grouped" and "Stacked" mode.
+                .showControls(typeof settings.showControls != 'undefined' ? settings.showControls : true)        //Allow user to switch between "Grouped" and "Stacked" mode.
+                .color( nv.utils.getColor(colors) );
+
         }
 
         chart.yAxis
@@ -52,30 +59,39 @@ function drawDonut(data, id, settings) {
     nv.addGraph(function() {
 
         var svg = setSLAChart(id, {w: settings.w, h: settings.h});
+        var colors = settings.colors || d3.scale.category20().range();
 
         var chart = settings.chart;
         if(!chart){
             chart = nv.models.pieChart()
                 .x(function(d) { return d.label })
                 .y(function(d) { return d.value })
-                //.labelThreshold(.08)
-                //.showLabels(false)
-                .color(d3.scale.category20().range().slice(10))
                 .width(settings.w)
                 .height(settings.h)
                 .donut(true);
+
             if(settings.title){
                 chart = chart.title(settings.title);
             }
         }
+
+        chart.color( nv.utils.getColor(colors) );
         chart.valueFormat(d3.format(settings.format || 'd'));
+
+
+
+        // .nvd3 .nv-legend .nv-series
+
         d3.select('#'+id+'-chart')
             //.datum(historicalBarChart)
             .datum(data)
             .transition().duration(1200)
             .call(chart);
 
-
+        if (!settings.clickableLegend) {
+            chart.legend.updateState(false);
+            svg.selectAll('.nv-series').style('cursor', 'unset');
+        }
 
         nv.utils.windowResize(chart.update);
 
@@ -87,21 +103,21 @@ function drawVBar(data, id, settings) {
     nv.addGraph(function() {
 
         var svg = setSLAChart(id, {w: settings.w, h: settings.h});
-        console.log(data);
         var chart = settings.chart;
+        var colors = settings.colors || d3.scale.category20().range();
         if(!chart){
 
             chart = nv.models.multiBarChart()
-                //     .transitionDuration(350)
+                    // .transitionDuration(350)
                 .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
                 .rotateLabels(0)      //Angle to rotate x-axis labels.
                 .showControls(false)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
                 .groupSpacing(0.1)  //Distance between each group of bars.
                 .margin(settings.margin || {top: 0, right: 20, bottom: 50, left: 175})
-
-            ;
-
+                .color( nv.utils.getColor(colors) );
+                // each data stream is one represented by one color in the array
          }
+
         if(settings.xformat !== false) {
             chart.xAxis
                 .tickFormat(settings.xformat ||  d3.format('f'));
