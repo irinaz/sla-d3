@@ -88,7 +88,7 @@ function drawDonut(data, id, settings) {
             .transition().duration(1200)
             .call(chart);
 
-        if (!settings.clickableLegend) {
+        if (!settings.clickableLegend) { //change this to not have false positives
             chart.legend.updateState(false);
             svg.selectAll('.nv-series').style('cursor', 'unset');
         }
@@ -129,6 +129,10 @@ function drawVBar(data, id, settings) {
                 .tickFormat(settings.yformat || d3.format('f'));
         }
 
+        if (settings.noLegend) {
+            chart.showLegend(false);
+        }        
+
       //  var formatAxis = d3.format('.3s');
       //  chart.yAxis
        //     .tickFormat(function(val) { return formatAxis(val).replace('G', 'B'); });
@@ -139,7 +143,11 @@ function drawVBar(data, id, settings) {
 
 
         if (settings.lines) {
-            console.log(settings);
+            chart.showLegend(true);
+
+            svg.select('.nv-legend>g').selectAll("*").remove();
+            svg.select('.nv-legend>g').append("text").text('blabla');
+
             for (var i= 0; i < settings.lines.length; i++) {
                 var p = settings.lines[i];
                 console.log("p:");

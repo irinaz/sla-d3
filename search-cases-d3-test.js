@@ -221,12 +221,11 @@ d3.json("data/suites-by-industry.json", function(data) {
             {
                 xformat: false,
                 margin:  {top: 200, right: 20, bottom: 550, left: 50},
+                noLegend: true,
                 chart:  nv.models.multiBarChart()
-                    //     .transitionDuration(350)
                     .reduceXTicks(false)   //If 'false', every single x-axis tick label will be rendered.
                     .rotateLabels(270)      //Angle to rotate x-axis labels.
                     .showControls(false)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
-                    .showLegend(false)
                     .groupSpacing(0.1)  //Distance between each group of bars.
 
             }
