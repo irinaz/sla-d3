@@ -148,7 +148,7 @@ function drawHBar(data, id, settings) {
         d3.select('#'+id+'-chart')
             .datum( data )
             .call(chart);
-            
+
         if ( settings.labels ) {
             var labels = svg.select('.nv-x').selectAll('text');
             labels.style('fill', settings.labels.color);
@@ -264,6 +264,8 @@ function drawVBar(data, id, settings) {
         if (settings.lines) {
             chart.showLegend(false);
             drawLineLabels(chart, svg, settings.lines);
+            svg.selectAll('.nv-series').style('cursor', 'unset');
+
         }
 
         nv.utils.windowResize( function () {
