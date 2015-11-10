@@ -93,7 +93,7 @@ d3.json("data/filing-per-year.json", function(data) {
                 h: 300,
                 title: data.total.count,
                 colors: ['#f00', '#0f0', '#0ff'],
-                clickableLegend: false
+                noClickableLegend: true
             }
 
 
@@ -226,7 +226,11 @@ d3.json("data/suites-by-industry.json", function(data) {
                     .reduceXTicks(false)   //If 'false', every single x-axis tick label will be rendered.
                     .rotateLabels(270)      //Angle to rotate x-axis labels.
                     .showControls(false)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
-                    .groupSpacing(0.1)  //Distance between each group of bars.
+                    .groupSpacing(0.1),  //Distance between each group of bars.
+                labels: {
+                    color:'#0000ff',
+                    size:'12'
+                }
 
             }
         );
