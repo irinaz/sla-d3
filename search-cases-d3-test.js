@@ -235,6 +235,34 @@ d3.json("data/suites-by-industry.json", function(data) {
             }
         );
 
+        //Industries (filings number per year) - needs height adjustment
+        drawVBar(
+            [
+                {
+                    key: "Suites Filed by Industry per Year",
+                    //color: "#d67777",
+                    values: data.items.map(function (datum) {
+                        return {x: datum.label, y: datum.count};
+                    })
+                }
+            ],
+            'suites-by-industry-45',
+            {
+                xformat: false,
+                margin:  {top: 200, right: 20, bottom: 550, left: 50},
+                noLegend: true,
+                chart:  nv.models.multiBarChart()
+                    .reduceXTicks(false)   //If 'false', every single x-axis tick label will be rendered.
+                    .rotateLabels(45)      //Angle to rotate x-axis labels.
+                    .showControls(false)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+                    .groupSpacing(0.1),  //Distance between each group of bars.
+                labels: {
+                    color:'#0000ff',
+                    size:'12'
+                }
+
+            }
+        );
 
     }
 );
