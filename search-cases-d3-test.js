@@ -27,7 +27,8 @@ d3.json("data/settlements.json", function(data) {
         'distribution-settlement-size',
         {
             yformat: function(val) { return mcapFormatter(val).replace('G', 'B'); },
-            customTooltip: true
+            customTooltip: true,
+            noXAxis: true
         }
 
     );

@@ -137,9 +137,9 @@ function drawHBar(data, id, settings) {
                 .tooltips(true)             //Show tooltips on hover.
 //          .transitionDuration(350)
                 .showControls(typeof settings.showControls != 'undefined' ? settings.showControls : true)        //Allow user to switch between "Grouped" and "Stacked" mode.
-                .color( nv.utils.getColor(colors) );
-
         }
+
+        chart.color( nv.utils.getColor(colors) );
 
         chart.yAxis
             .tickFormat(d3.format(settings.format || 'd'));
@@ -238,11 +238,12 @@ function drawVBar(data, id, settings) {
                 .rotateLabels(0)      //Angle to rotate x-axis labels.
                 .showControls(false)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
                 .groupSpacing(0.1)  //Distance between each group of bars.
-                .color( nv.utils.getColor(colors) );
+
                 // each data stream is one represented by one color in the array
          }
 
-
+        chart.color( nv.utils.getColor(colors) );
+        
         if(settings.xformat !== false) {
             chart.xAxis
                 .tickFormat(settings.xformat ||  d3.format('f'));
@@ -258,6 +259,9 @@ function drawVBar(data, id, settings) {
             chart.showLegend(false);
         }
 
+        if (settings.noXAxis) {
+            chart.showXAxis(false);
+        }
         if (settings.margin) {
             // default margins are {top: 30, right: 20, bottom: 50, left: 60}
             chart.margin(settings.margin);
