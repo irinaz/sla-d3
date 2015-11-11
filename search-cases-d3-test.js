@@ -9,19 +9,29 @@ get all per year data
 //Settlement Distribution
 d3.json("data/settlements.json", function(data) {
 
-    // drawVBar(
-    //     {
-    //         key:'Settlement total',
-    //         values: data.map( function (datum) {
+    drawVBar(
+        [
+            {
+                key:'Settlement total',
+                values: data.map( function (datum, index) {
+                    return {
+                        x: index, 
+                        y: parseFloat(datum.field_settl_total), 
+                        title: datum.title,
+                        field_nature_of_misstatement: datum.field_nature_of_misstatement,
+                        field_resolution_phase: datum.field_resolution_phase
+                        };
+                })
+            }
+        ],
+        'distribution-settlement-size',
+        {
+            yformat: function(val) { return mcapFormatter(val).replace('G', 'B'); },
+            customTooltip: true
+        }
 
-    //         })
-    //     }
+    );
 
-    // )
-
-    var settings = {rows: data};
-
-    d3settlement('distribution-settlement-size', settings);
 });
 
 
@@ -41,8 +51,7 @@ d3.json("data/filing-per-year.json", function(data) {
             ],
             'filings-per-year',
             {
-                w: 200,
-                h: 100,
+
 				margin: {top: 0, right: 20, bottom: 50, left: 100},
                 format: 'd',
                 colors: ['#0f0', '#000', '#00f']
@@ -106,8 +115,7 @@ d3.json("data/filing-per-year.json", function(data) {
 
             'filings-by-market-cap-range',
             {
-                w: 300,
-                h: 300,
+
                 title: data.total.count,
                 colors: ['#f00', '#0f0', '#0ff'],
                 noClickableLegend: true

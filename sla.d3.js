@@ -145,6 +145,11 @@ function drawHBar(data, id, settings) {
             .tickFormat(d3.format(settings.format || 'd'));
         chart.valueFormat(d3.format(settings.format || 'd'));
 
+        if (settings.margin) {
+            // default margins are {top: 30, right: 20, bottom: 50, left: 60}
+            chart.margin(settings.margin);
+        }        
+
         d3.select('#'+id+'-chart')
             .datum( data )
             .call(chart);
@@ -190,9 +195,10 @@ function drawDonut(data, id, settings) {
         chart.color( nv.utils.getColor(colors) );
         chart.valueFormat(d3.format(settings.format || 'd'));
 
-
-
-        // .nvd3 .nv-legend .nv-series
+        if (settings.margin) {
+            // default margins are {top: 30, right: 20, bottom: 50, left: 60}
+            chart.margin(settings.margin);
+        }        
 
         d3.select('#'+id+'-chart')
             //.datum(historicalBarChart)
@@ -255,7 +261,43 @@ function drawVBar(data, id, settings) {
         if (settings.margin) {
             // default margins are {top: 30, right: 20, bottom: 50, left: 60}
             chart.margin(settings.margin);
-        }        
+        }
+
+
+        if (settings.customTooltip) {
+
+            chart.tooltip.contentGenerator( function (datum) {
+
+                var titleString = '',
+                    title = datum.data.title;
+
+                if (title) {
+                    titleString += '<p class="title">' + title + '</p><p>';
+                }
+                /*
+                 if (mediator) {
+                 titleString += 'Mediator: ' + mediator + '<br/>';
+                 }
+                 */
+                titleString += 'Settlement amount: ' + formatValue(datum.data.y) + '<br/>';
+                if (datum.data.field_nature_of_misstatement) {
+                    titleString += 'Nature of misstatement: ' +
+                        (data.field_nature_of_misstatement == "FI" ? "Financial" : "Non-Financial")+ '<br/>';
+                }
+
+                if (datum.data.field_resolution_phase ) {
+                    titleString += 'Resolution phase: ' + data.field_resolution_phase + '<br/>';
+                }
+
+                //      titleString += 'Amount paid by insurer:' + formatValue(data[1].values[i].y) + '<br/>';
+
+
+
+                return titleString;
+
+            } );
+
+        }
 
         d3.select('#'+id+'-chart')
             .datum( data )
