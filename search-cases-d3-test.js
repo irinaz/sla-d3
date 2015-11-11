@@ -267,4 +267,10 @@ d3.json("data/suites-by-industry.json", function(data) {
     }
 );
 
- 
+//Settlement Distribution
+d3.json("data/settlements.json", function(data) {
+
+    var settings = {rows: data};
+
+    d3settlement('distribution-settlement-size', settings);
+});

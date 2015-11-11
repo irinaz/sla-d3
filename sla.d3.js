@@ -314,3 +314,126 @@ function drawFixedLineAndText(id, yValue,  text, chart) {
     //     .text(text);
 //end fixed line
 }
+
+
+function formatValue(value) {
+    value = value / 1e6;
+    return ' $' +(value < 0.1 ? '<0.1' : value.toFixed(value < 1 ? 2 : 0))+ 'M';
+}
+
+function d3settlement (select, settings) {
+    //console.log(settings);
+
+    var chart;
+    var options = {
+        duration: 300,
+        margin: {left: 70, bottom: 100},
+        rotateLabels: 45,
+        groupSpacing: .2,
+        showXAxis: false
+    };
+    var xAxis = {
+        axisLabel: 'X axis label for the glory',
+        axisLabelDistance: 35,
+        showMaxMin: false,
+        tickFormatString: ',.6f'
+    };
+
+    if (!settings.data) {
+        var rows = settings.rows;
+        //var yLabels = rows.map(function(d) { return d.shift(); });
+        settings.data = [{key: 'Settlement total', values: []}/*, {key: 'Amount Insurer paying', values: []}*/];
+        settings.data.mediators = [];
+        settings.data.titles = [];
+        settings.data.misstamenet = [];
+        settings.data.resolution = [];
+
+
+        jQuery.each(rows, function (i, row) {
+            var title = row.title,
+                mediator = row.field_mediator,
+                misstamenet = row.field_nature_of_misstatement,
+                resolution = row.field_resolution_phase,
+                settlTotal = settings.data[0];
+            //amountPaid = settings.data[1];
+
+            settlTotal.values.push({y: parseFloat(row.field_settl_total), x: i, row: row});
+            //amountPaid.values.push({y: parseFloat(row.field_amount_insurer_paying), x: i, row: row});
+
+            settings.data.mediators.push(mediator);
+            settings.data.misstamenet.push(misstamenet);
+            settings.data.resolution.push(resolution);
+            settings.data.titles.push(title);
+        })
+    }
+
+    nv.addGraph(function () {
+        chart = nv.models.multiBarChart()
+            //.barColor(d3.scale.category20().range())
+            .options(options);
+
+        chart.reduceXTicks(false).staggerLabels(true).showControls(false).height(200);
+
+        chart.tooltip.contentGenerator(function (obj) {
+            console.log(obj);
+
+            var titleString = '',
+                title = obj.data.row.title,
+            // mediator = settings.data.mediators[i],
+                data = obj.data.row;
+
+            if (title) {
+                titleString += '<p class="title">' + title + '</p><p>';
+            }
+            /*
+             if (mediator) {
+             titleString += 'Mediator: ' + mediator + '<br/>';
+             }
+             */
+            titleString += 'Settlement amount: ' + formatValue(obj.data.y) + '<br/>';
+            if (data.field_nature_of_misstatement) {
+                titleString += 'Nature of misstatement: ' +
+                    (data.field_nature_of_misstatement == "FI" ? "Financial" : "Non-Financial")+ '<br/>';
+            }
+
+            if ( data.field_resolution_phase ) {
+                titleString += 'Resolution phase: ' + data.field_resolution_phase + '<br/>';
+            }
+
+
+            //      titleString += 'Amount paid by insurer:' + formatValue(data[1].values[i].y) + '<br/>';
+
+
+
+            return titleString;
+
+
+        });
+        var xAxis = chart.xAxis
+            .options(xAxis);
+
+        if (xAxis.tickFormatString) {
+            xAxis.tickFormat(d3.format(xAxis.tickFormatString))
+        }
+
+        chart.yAxis
+            .axisLabelDistance(-5)
+            .tickFormat(function (value) { return '$' + value / 1e6 + 'M'});
+
+        var bars = d3.select('#' + select).append('svg')
+            .datum(settings.data)
+            .call(chart)
+            .selectAll('.nv-bar')
+            .attr('class', function (barData) {
+                var phase = barData.row.field_resolution_phase;
+                return this.getAttribute('class') + ' ' + (phase == null ? "" : phase.replace(/\s+/g, '-').toLowerCase());
+            })
+            .on("click", function (barData) {
+                window.location = "/node/" + barData.row.nid;    // link bar to the node
+            });
+        nv.utils.windowResize(chart.update);
+
+        return chart;
+    });
+
+}

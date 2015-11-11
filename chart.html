@@ -5,7 +5,9 @@
 <title>SLA charts</title>
 
 <!-- javascript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
 
 <script type="text/javascript" src="nvd3/nv.d3.js"></script>
 <script type="text/javascript" src="sla.d3.js"></script>
@@ -43,6 +45,10 @@
   <div id="market-data" class="span12 clear-row odd two well case-section" >
     <h2> Market Data </h2>
     <div class="span12 clear-row ">
+        <div id="distribution-settlement-size" class="chart donut span12" >
+            <h3> Settlements Distribution </h3>
+        </div>
+
      
       <div id="suites-by-industry" class="chart donut span12" >
         <h3> Suites Filed by Industry - vertical labels - please add control for font size/color </h3> 
