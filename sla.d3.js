@@ -232,10 +232,10 @@ function drawVBar(data, id, settings) {
                 .rotateLabels(0)      //Angle to rotate x-axis labels.
                 .showControls(false)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
                 .groupSpacing(0.1)  //Distance between each group of bars.
-                // .margin(settings.margin || {top: 0, right: 20, bottom: 50, left: 175})
                 .color( nv.utils.getColor(colors) );
                 // each data stream is one represented by one color in the array
          }
+
 
         if(settings.xformat !== false) {
             chart.xAxis
@@ -250,6 +250,11 @@ function drawVBar(data, id, settings) {
 
         if (settings.noLegend) {
             chart.showLegend(false);
+        }
+
+        if (settings.margin) {
+            // default margins are {top: 30, right: 20, bottom: 50, left: 60}
+            chart.margin(settings.margin);
         }        
 
         d3.select('#'+id+'-chart')
@@ -375,7 +380,7 @@ function d3settlement (select, settings) {
         chart.reduceXTicks(false).staggerLabels(true).showControls(false).height(200);
 
         chart.tooltip.contentGenerator(function (obj) {
-            console.log(obj);
+            // console.log(obj);
 
             var titleString = '',
                 title = obj.data.row.title,
